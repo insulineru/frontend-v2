@@ -71,6 +71,7 @@ const props = withDefaults(defineProps<Props>(), {
   isPaginated: false,
   noResultsLabel: '',
   link: () => null,
+  onRowClick: () => null,
   initialState: () => ({
     sortColumn: null,
     sortDirection: null

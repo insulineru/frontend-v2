@@ -74,7 +74,7 @@ export default function useTokenPricesQuery(
         PER_PAGE * page,
         PER_PAGE * (page + 1)
       );
-      console.log('Fetching', pageAddresses.length, 'prices');
+      // console.log('Fetching', pageAddresses.length, 'prices');
       prices = {
         ...prices,
         ...(await coingeckoService.prices.getTokens(pageAddresses))
@@ -82,7 +82,7 @@ export default function useTokenPricesQuery(
     }
 
     prices = injectWstEth(prices);
-    console.log('Injecting price data', pricesToInject.value);
+    // console.log('Injecting price data', pricesToInject.value);
     prices = injectCustomTokens(prices, pricesToInject.value);
     return prices;
   };

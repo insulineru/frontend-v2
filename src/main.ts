@@ -26,6 +26,7 @@ import i18n from '@/plugins/i18n';
 import mixins from '@/plugins/mixins';
 import router from '@/plugins/router';
 import initSentry from '@/plugins/sentry';
+import setConfig from '@/plugins/vueConfig';
 import vueQuery from '@/plugins/vueQuery';
 import Web3Plugin from '@/services/web3/web3.plugin';
 import store from '@/store';
@@ -57,6 +58,7 @@ const app = createApp(Root)
   .mixin(mixins)
   .use(VueVirtualScroller);
 
+setConfig(app);
 registerDirectives(app);
 registerGlobalComponents(app);
 initSentry(app);
