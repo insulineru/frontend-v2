@@ -17,6 +17,8 @@ type QueryResponse = SubgraphGauge[];
 export default function useGaugesQuery(
   options: UseQueryOptions<QueryResponse> = {}
 ) {
+  console.time('useGaugesQuery-load');
+  console.time('useGaugesQuery-preQuery');
   /**
    * QUERY KEY
    */
@@ -26,8 +28,12 @@ export default function useGaugesQuery(
    * QUERY FUNCTION
    */
   const queryFn = async () => {
+    console.timeEnd('useGaugesQuery-preQuery');
+    console.time('useGaugesQuery-query');
     try {
-      return await gaugesSubgraphService.gauges.get();
+      const gauges = await gaugesSubgraphService.gauges.get();
+      console.timeEnd('useGaugesQuery-query');
+      return gauges;
     } catch (error) {
       console.error('Failed to fetch gauges', error);
       return [];
@@ -42,5 +48,6 @@ export default function useGaugesQuery(
     ...options
   });
 
+  console.timeEnd('useGaugesQuery-load');
   return useQuery<QueryResponse>(queryKey, queryFn, queryOptions);
 }

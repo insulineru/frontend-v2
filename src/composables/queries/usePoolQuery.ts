@@ -28,6 +28,7 @@ export default function usePoolQuery(
   isEnabled: Ref<boolean> = ref(true),
   options: QueryObserverOptions<FullPool> = {}
 ) {
+  console.time('usePoolQueryLoad');
   console.time('usePoolQueryInit');
   /**
    * COMPOSABLES
@@ -49,7 +50,7 @@ export default function usePoolQuery(
    * COMPUTED
    */
   const enabled = computed(
-    () => !appLoading.value && !dynamicDataLoading.value && isEnabled.value
+    () => /*!appLoading.value && !dynamicDataLoading.value &&*/ isEnabled.value
   );
 
   /**
@@ -135,9 +136,10 @@ export default function usePoolQuery(
   /**
    * QUERY INPUTS
    */
-  const queryKey = QUERY_KEYS.Pools.Current(id, gaugeAddresses);
+  const queryKey = QUERY_KEYS.Pools.Simple(id);
 
   const queryFn = async () => {
+    console.timeEnd('loadingPool-preQuery');
     console.time('usePoolQueryQueryFn');
     console.time('usePoolQuery-SubgraphGet');
     let [pool] = await balancerSubgraphService.pools.get({
@@ -259,5 +261,6 @@ export default function usePoolQuery(
     ...options
   });
 
+  console.timeEnd('usePoolQueryLoad');
   return useQuery<FullPool>(queryKey, queryFn, queryOptions);
 }

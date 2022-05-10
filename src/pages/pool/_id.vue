@@ -31,9 +31,11 @@ interface PoolPageData {
   id: string;
 }
 
-
-console.time("loadingPool");
-console.time("loadingPool-composables");
+console.time('loadingPool');
+console.time('loadingPool-pool');
+console.time('loadingPool-poolQueryLoading');
+console.time('loadingPool-preQuery');
+console.time('loadingPool-composables');
 /**
  * COMPOSABLES
  */
@@ -45,15 +47,15 @@ const { prices } = useTokens();
 const { explorerLinks: explorer, blockNumber } = useWeb3();
 const { addAlert, removeAlert } = useAlerts();
 const { balancerTokenListTokens } = useTokens();
-console.timeEnd("loadingPool-composables");
-console.time("loadingPool-queries");
+console.timeEnd('loadingPool-composables');
+console.time('loadingPool-queries');
 /**
  * QUERIES
  */
 const poolQuery = usePoolQuery(route.params.id as string);
 const poolSnapshotsQuery = usePoolSnapshotsQuery(route.params.id as string, 30);
-console.timeEnd("loadingPool-queries");
-console.time("loadingPool-state");
+console.timeEnd('loadingPool-queries');
+console.time('loadingPool-state');
 /**
  * STATE
  */
@@ -63,8 +65,8 @@ const data = reactive<PoolPageData>({
 
 const { id } = toRefs(data);
 
-console.timeEnd("loadingPool-state");
-console.time("loadingPool-computed");
+console.timeEnd('loadingPool-state');
+console.time('loadingPool-computed');
 
 /**
  * COMPUTED
@@ -189,7 +191,15 @@ watch(blockNumber, () => {
 watch(loadingPool, () => {
   console.timeEnd('loadingPoolQueryEnd');
   console.timeEnd('loadingPool');
-})
+});
+
+watch(pool, () => {
+  console.timeEnd('loadingPool-pool');
+});
+
+watch(pool, () => {
+  console.timeEnd('loadingPool-poolQueryLoading');
+});
 
 watch(poolQuery.error, () => {
   if (poolQuery.error.value) {

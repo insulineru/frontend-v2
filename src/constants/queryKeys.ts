@@ -31,6 +31,7 @@ const QUERY_KEYS = {
       'current',
       { id, gaugeAddresses }
     ],
+    Simple: (id: string) => [POOLS_ROOT_KEY, 'simple', { id }],
     Snapshot: (networkId: Ref<Network>, id: string) => [
       POOLS_ROOT_KEY,
       'snapshot',
