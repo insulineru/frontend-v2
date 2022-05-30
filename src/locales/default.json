@@ -1,5 +1,4 @@
 {
-    "aboutElementFinance": "Element is an open source protocol for fixed and variable yield markets. It is built on Balancer V2. View and manage your liquidity positions directly on Element.fi.",
     "accept": "Accept",
     "account": "Account",
     "action": "Action",
@@ -245,6 +244,13 @@
     "exploreBalancerV1Pools": "Explore V1 pools ->",
     "explorePools": "Explore pools",
     "featuredProtocol": "Featured ecosystem protocol",
+    "featuredProtocols": { 
+        "title": "Featured ecosystem protocols",
+        "Copper": "Copper offers an intuitive UI for creating, managing & tracking Balancer Liquidity Bootstrapping Pools (LBPs) on a transparent and user-friendly platform.",
+        "Element": "An open source protocol for fixed & variable yield markets, Element enables efficient trading with a Balancer Pool that minimizes slippage and impermanent loss.",
+        "Sense": "Sense is a protocol for DeFi yield primitives, and Sense Space, an AMM built on Balancer, facilitates efficient trading between yield and principle tokens.",
+        "Tracer": "An open-source protocol for derivative markets, Tracer DAO utilizes Balancer Protocol for aggregated liquidity and creating a market for leveraged tokens."        
+    }, 
     "fees": "fees",
     "feesManagedByGauntlet": "Liquidity providers earn dynamic swap fees on every trade utilizing the liquidity in this pool. Dynamic swap fees are controlled by governance and are currently set by Gauntlet.",
     "feesTime": "Fees ({0})",
@@ -552,6 +558,20 @@
     },
     "poolType": "Pool type",
     "poolValue": "Pool value",
+    "poolWarnings": {
+        "bugWarning20220513": {
+            "title": "This pool contains double-entrypoint tokens, which have been found to be incompatible with Balancer. It is currently not possible to withdraw all assets from the pool proportionally. While it is possible to withdraw in a single asset, liquidity providers are advised to wait. A mechanism is being implemented to allow for proportional withdrawals. <a href=\"https://forum.balancer.fi/t/medium-severity-bug-found/3161\" target=\"blank\" rel=\"noreferrer\" class=\"underline\">Learn more </a>"
+        },
+        "poolOwnerVulnWarningGovernance": {
+            "title": "This pool is affected by a vulnerability disclosed <a href=\"https://forum.balancer.fi/t/vulnerability-disclosure/3179\" target=\"blank\" rel=\"noreferrer\" class=\"underline\">here</a>. Funds are safe insofar as the exploit would have to be initiated by Balancer Governance itself. A new version of the pool will be deployed in the next few weeks that can be migrated to."
+        },
+        "poolOwnerVulnWarningEcosystem": {
+            "title": "This pool is affected by a vulnerability disclosed <a href=\"https://forum.balancer.fi/t/vulnerability-disclosure/3179\" target=\"blank\" rel=\"noreferrer\" class=\"underline\">here</a>. Funds are safe insofar as the exploit would have to be initiated by a multisig composed of known participants in the Balancer ecosystem."
+        },
+        "poolOwnerVulnWarningEcosystemMigrate": {
+            "title": "This pool is affected by a vulnerability disclosed <a href=\"https://forum.balancer.fi/t/vulnerability-disclosure/3179\" target=\"blank\" rel=\"noreferrer\" class=\"underline\">here</a>. Funds are safe insofar as the exploit would have to be initiated by a multisig composed of known participants in the Balancer ecosystem. A new version of the pool will be deployed in the next few weeks that can be migrated to."
+        }
+    },
     "popularBases": "Popular:",
     "portfolio": "Portfolio",
     "potential": "Potential",
@@ -637,7 +657,6 @@
     "swapFeeManager": "Swap fee manager",
     "switchNetwork": "Switch network",
     "symbol": "Symbol",
-    "bugWarning20220513": "This pool contains double-entrypoint tokens, which have been found to be incompatible with Balancer. It is currently not possible to withdraw all assets from the pool proportionally. While it is possible to withdraw in a single asset, liquidity providers are advised to wait. A mechanism is being implemented to allow for proportional withdrawals. <a href=\"https://forum.balancer.fi/t/medium-severity-bug-found/3161\" target=\"blank\" rel=\"noreferrer\" class=\"underline\">Learn more </a>",
     "veBAL": {
         "hero": {
             "eyebrow": "Introducing veBAL",
@@ -932,7 +951,7 @@
     },
     "tableShowsBalancerV2Pools": "This table shows only Balancer V2 pools.",
     "theme": "Theme",
-    "thirdPartyRewards": {
+    "yieldAprRewards": {
         "apr": {
             "steth": "stETH staking rewards APR",
             "boosted": "Boosted APR"
@@ -1055,6 +1074,14 @@
             "totalWithSlippage": "Zero slippage to wrap {0}",
             "tradeFees": "Wrap fees"
         }
+    },
+    "tradeToggle": {
+        "wrapEth": "Gas trade—required for wrapping ETH",
+        "unwrapEth": "Gas trade—required for unwrapping ETH",
+        "fromEth": "Gas trade—required when trading from ETH",
+        "signature": "Signature ‘gasless’ trade—price optimized with MEV protection.",
+        "tradeGasless": "Trade gasless by signature",
+        "tradeWithGas": "Trade with a gas fee"
     },
     "transactionAction": {
         "approve": "Approve",

@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router';
 import StakedPoolsTable from '@/components/contextual/pages/pools/StakedPoolsTable.vue';
 import UnstakedPoolsTable from '@/components/contextual/pages/pools/UnstakedPoolsTable.vue';
 import TokenSearchInput from '@/components/inputs/TokenSearchInput.vue';
-import FeaturedPools from '@/components/sections/FeaturedPools.vue';
+import FeaturedProtocols from '@/components/sections/FeaturedProtocols.vue';
 import PoolsTable from '@/components/tables/PoolsTable/PoolsTable.vue';
 import usePoolFilters from '@/composables/pools/usePoolFilters';
 import usePools from '@/composables/pools/usePools';
@@ -77,10 +77,7 @@ const migratableUserPools = computed(() => {
 });
 
 const isInvestmentPoolsTableLoading = computed(
-  () =>
-    dataStates['basic'] === 'loading' ||
-    isLoadingMore.value ||
-    priceQueryLoading.value
+  () => dataStates['basic'] === 'loading' || priceQueryLoading.value
 );
 
 watch(showMigrationColumn, () => console.log(showMigrationColumn.value));
@@ -161,7 +158,7 @@ function navigateToCreatePool() {
       >
       </PoolsTable>
       <div v-if="isElementSupported" class="mt-16 p-4 lg:p-0">
-        <FeaturedPools />
+        <FeaturedProtocols />
       </div>
     </BalStack>
   </div>
