@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { getAddress } from '@ethersproject/address';
 import { compact, pick, take } from 'lodash';
-import { computed, ref } from 'vue';
+import { computed, onUpdated, ref } from 'vue';
 
 import SelectTokenModal from '@/components/modals/SelectTokenModal/SelectTokenModal.vue';
 import useTokens from '@/composables/useTokens';
 import useVeBal from '@/composables/useVeBAL';
 import { NATIVE_ASSET_ADDRESS, TOKENS } from '@/constants/tokens';
 import useWeb3 from '@/services/web3/useWeb3';
+
+import TokenSearchInputToken from './TokenSearchInputToken.vue';
 
 type Props = {
   modelValue: string[];
@@ -36,6 +38,9 @@ const { tokens, balances, dynamicDataLoading } = useTokens();
 const { account, appNetworkConfig } = useWeb3();
 const { veBalTokenInfo } = useVeBal();
 
+onUpdated(() => {
+  console.log({ sortedBalances: sortedBalances.value });
+});
 /**
  * COMPUTED
  */
@@ -101,30 +106,27 @@ function onClick() {
           <span class="ml-2">{{ tokens[token]?.symbol }}</span>
         </BalChip>
       </div>
-      <div
-        v-if="account && !dynamicDataLoading && !hasNoBalances"
-        class="text-gray-400 overflow-x-auto"
-      >
-        <span class="mr-2">{{ $t('inYourWallet') }}:</span>
-        <span
-          v-for="token in sortedBalances"
-          :key="`wallet-${token.symbol}`"
-          class="mr-6 cursor-pointer hover:text-blue-700"
-          @click="addToken(token.address)"
-        >
-          {{ token?.symbol }}
-        </span>
-      </div>
-      <div v-else class="text-gray-400 flex flex-wrap py-3">
-        <span class="mr-2">{{ $t('popularBases') }}</span>
-        <span
-          v-for="token in whiteListedTokens"
-          :key="`popular-${token.symbol}`"
-          class="mr-3 md:mr-4 cursor-pointer hover:text-gray-700 dark:hover:text-white transition-colors"
-          @click="addToken(token.address)"
-        >
-          {{ token?.symbol }}
-        </span>
+      <div class="text-gray-400 flex flex-wrap overflow-x-auto">
+        <template v-if="account && !dynamicDataLoading && !hasNoBalances">
+          <span class="mr-2">{{ $t('inYourWallet') }}:</span>
+          <TokenSearchInputToken
+            v-for="token in sortedBalances"
+            :symbol="token.symbol"
+            :address="token.address"
+            :key="token.symbol"
+            @click="addToken(token.address)"
+          />
+        </template>
+        <template v-else>
+          <span class="mr-2">{{ $t('popularBases') }}</span>
+          <TokenSearchInputToken
+            v-for="token in whiteListedTokens"
+            :key="token.symbol"
+            :symbol="token.symbol"
+            :address="token.address"
+            @click="addToken(token.address)"
+          />
+        </template>
       </div>
     </div>
     <teleport to="#modal">
