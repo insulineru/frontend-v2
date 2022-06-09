@@ -16,12 +16,7 @@ async function generate() {
   // Handle special case where we are using local test node.
   // If we use the whole list of ~100 tokens, node will most likely crash
   if (process.env.VUE_APP_NETWORK == '31337') {
-    tokenlists = JSON.parse(
-      fs.readFileSync(
-        path.resolve(__dirname, '../../fixtures/listed.tokenlist.json'),
-        'utf8'
-      )
-    );
+    tokenlists = require('../../fixtures/listed.tokenlist.json');
   } else {
     const tokenListService = new TokenListService(process.env.VUE_APP_NETWORK);
     tokenlists = await tokenListService.getAll();
